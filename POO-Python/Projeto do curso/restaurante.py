@@ -3,9 +3,9 @@ class Restaurante:
     restaurantes = []
 
     def __init__(self, nome, categoria):
-        self.nome = nome
-        self.categoria = categoria
-        self.ativo = True
+        self.nome = nome.title()
+        self.categoria = categoria.upper()
+        self._ativo = True
         Restaurante.restaurantes.append(self)
 
     #Exibindo de uma forma diferente o endereço do objeto
@@ -13,14 +13,23 @@ class Restaurante:
     def __str__(self):
         return f"{self.nome} | {self.categoria}"
     
+    @classmethod
+    def listarRestaurentes(csl):
+        print(f'{"NOME DO RESTAURANTE".ljust(25)} | {"Categoria".ljust(25)} |    {"STATUS"}')
+        for restaurante in csl.restaurantes:
+            print(f"{restaurante.nome.ljust(25)} | {restaurante.categoria.ljust(25)} |  {restaurante.ativo}")
 
-    def listarRestaurentes():
-        for restaurante in Restaurante.restaurantes:
-            print(f"Nome: {restaurante.nome}\n Categoria: {restaurante.categoria}\n Ativo: {restaurante.ativo}")
 
+    @property
+    def ativo(self):
+     return 'verdadeiro' if self._ativo else 'false'
+    
+    def alterarEstado(self):
+        self._ativo = not self._ativo
 
+restaurante = Restaurante("sabor verdadeiro","Diversos")
+restaurante.alterarEstado()
 
-restaurante = Restaurante("Sabor verdadeiro","Diversos")
 Restaurante.listarRestaurentes()
 
 
